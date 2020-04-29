@@ -18,7 +18,6 @@
  * You should have received a copy of the GNU General Public License
  * along with MekHQ.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package mekhq.campaign.mission;
 
 import java.io.PrintWriter;
@@ -534,7 +533,7 @@ public class AtBContract extends Contract implements Serializable {
             moraleLevel -= 2;
         }
         // 2 – 5: Morale level decreases 1 level
-        else if (roll >= 2 && roll <= 5) {
+        else if (roll <= 5) {
             moraleLevel -= 1;
         }
         // 6 – 8: Morale level remains the same
@@ -911,13 +910,11 @@ public class AtBContract extends Contract implements Serializable {
                     partsAvailabilityLevel++;
                     break;
                 case 6:
-                    String unit =
-                            c.getUnitMarket().addSingleUnit(c, UnitMarket.MARKET_EMPLOYER,
-                                    UnitType.MEK, getEmployerCode(),
-                                    IUnitRating.DRAGOON_F, 50) +
-                                    " offered by employer on the <a href='UNIT_MARKET'>unit market</a>";
+                    String unit = c.getUnitMarket().addSingleUnit(c, UnitMarket.MARKET_EMPLOYER,
+                        UnitType.MEK, getEmployerCode(),
+                        IUnitRating.DRAGOON_F, 50);
                     if (unit != null) {
-                        text += "Surplus Sale: " + unit;
+                        text += String.format("Surplus Sale: %s offered by employer on the <a href='UNIT_MARKET'>unit market</a>", unit);
                     }
                 }
                 c.addReport(text);
